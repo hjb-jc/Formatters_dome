@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Formatters_dome:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="Formatters_dome.war">
+      <element id="artifact" artifact-name="Formatters_dome:war exploded" />
+    </root>
+  </artifact>
+</component>

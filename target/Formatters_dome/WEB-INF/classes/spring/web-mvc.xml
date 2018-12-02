@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+    <!--启用注解扫描-->
+    <context:component-scan base-package="com.nf2.Formatters_dome.controller" />
+
+    <!--启用 mvc 的常用注解-->
+    <mvc:annotation-driven validator="myValidator"  conversion-service="conversionService" />
+
+    <!--将所有的静态资源交还 Servlet 处理-->
+    <mvc:default-servlet-handler />
+
+    <!--配置返回页面-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/jsp/" />
+        <property name="suffix" value=".jsp" />
+        <!--<property name="order" value="1"/>--><!--order优先级-->
+    </bean>
+
+    <!--配置验证器-->
+    <bean id="myValidator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+        <property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>
+        <property name="validationMessageSource" ref="messageSource"/>
+    </bean>
+
+    <!--配置类型转换规则-->
+    <bean name="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.nf2.Formatters_dome.databinder.MyStringToDateConverter" />
+            </set>
+        </property>
+        <property name="formatters">
+            <set>
+                <bean class="com.nf2.Formatters_dome.formatter.PersonAnnotationFormatter" />
+            </set>
+        </property>
+    </bean>
+
+    <mvc:annotation-driven conversion-service="conversionService1"/>
+    <bean id="dateFormatter" class="com.nf2.Formatters_dome.service.DateFormatter" c:_0="dd-MM-yyyy"/>
+    <!-- 声明formatter的bean，提供给下面的MyFormatterRegistrar -->
+    <bean id="conversionService1" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="formatterRegistrars">
+            <set>
+                <bean class="com.nf2.Formatters_dome.service.MyFormatterRegistrar" p:dateFormatter-ref="dateFormatter"/>
+            </set>
+        </property>
+    </bean>
+
+    <!--配置上传下载-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
+</beans>
