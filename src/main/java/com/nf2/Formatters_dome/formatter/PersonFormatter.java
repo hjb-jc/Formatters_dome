@@ -25,8 +25,8 @@ public class PersonFormatter implements Formatter<Person> {
         return provinceMapping.get(id.substring(0, 2));
     }
 
-    private Date parseBirthFromId(String id) throws ParseException {
-        return new SimpleDateFormat("yyyyMMdd").parse(id.substring(6, 14));
+    private String parseBirthFromId(String id) throws ParseException {
+        return String.valueOf(new SimpleDateFormat("yyyyMMdd").parse(id.substring(6, 14)));
     }
 
     private String parseGenderFromId(String id) {

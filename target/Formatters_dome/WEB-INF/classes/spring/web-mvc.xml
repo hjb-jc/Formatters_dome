@@ -44,9 +44,9 @@
         </property>
     </bean>
 
-    <mvc:annotation-driven conversion-service="conversionService1"/>
+   <!-- <mvc:annotation-driven conversion-service="conversionService1"/>
     <bean id="dateFormatter" class="com.nf2.Formatters_dome.service.DateFormatter" c:_0="dd-MM-yyyy"/>
-    <!-- 声明formatter的bean，提供给下面的MyFormatterRegistrar -->
+    &lt;!&ndash; 声明formatter的bean，提供给下面的MyFormatterRegistrar &ndash;&gt;
     <bean id="conversionService1" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="formatterRegistrars">
             <set>
@@ -54,7 +54,7 @@
             </set>
         </property>
     </bean>
-
+-->
     <!--配置上传下载-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver" />
 </beans>

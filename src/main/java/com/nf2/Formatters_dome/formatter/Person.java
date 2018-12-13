@@ -5,13 +5,13 @@ import java.util.Date;
 public class Person {
     private String name;
     private String province;
-    private Date birthday;
+    private String birthday;
     private String gender;
 
     public Person() {
     }
 
-    public Person(String province, Date birthday, String gender) {
+    public Person(String province, String birthday, String gender) {
         this.province = province;
         this.birthday = birthday;
         this.gender = gender;
@@ -33,11 +33,11 @@ public class Person {
         this.province = province;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
